@@ -1,82 +1,92 @@
 'use strict';
 
-/*
-(function($) {
-	var 
+		var vimeoUserName = 'storyfarmvideo';
+
+		// Tell Vimeo what function to call
+		var callback = 'showThumbs';
+
+		// Set up URLs
+		var url = 'http://vimeo.com/api/v2/' + vimeoUserName + '/videos.json?callback=' + callback;
+
+		// load vimeo data
+		function init() {
+			var js = document.createElement('script');
+			js.setAttribute('type', 'text/javascript');
+			js.setAttribute('src', url);
+			document.getElementsByTagName('head').item(0).appendChild(js);
+		}
+
+		// Print videos with thumbnails to page
+		function showThumbs(videos) {
+			var thumbs = document.getElementById('thumbs');
+			thumbs.innerHTML = '';
+
+			for (var i = 0; i < videos.length; i++) {
+				var a = document.createElement('a');
+				a.setAttribute('href', 'details.html?vimeoID=' + videos[i].id);
+				a.setAttribute('target', '_blank');
+				a.setAttribute('class', 'videoLink large-12 columns');
+				a.setAttribute('data-vimeo', videos[i].id);
+				a.setAttribute('data-youtube', videos[i].id);
+				a.appendChild(document.createTextNode(videos[i].title));
+				
+				var thumb = document.createElement('img');
+				thumb.setAttribute('src', videos[i].thumbnail_large);
+				thumb.setAttribute('alt', videos[i].title);
+				thumb.setAttribute('title', videos[i].title);
+				thumb.setAttribute('class', 'large-12 columns thumbnail');
+				
+
+				
+				var p = document.createElement('p');
+				p.setAttribute('class', 'large-4 columns');
+				p.appendChild(document.createElement('br'));
+				p.appendChild(a);
+				p.appendChild(document.createElement('br'));
+				p.appendChild(document.createElement('br'));
+				p.appendChild(thumb);
+				thumbs.appendChild(p);
+			}
+			
+			$('.videoLink').on('click', function(event) {
+				event.preventDefault();
+				showStats($(this).attr('data-vimeo'), $(this).attr('data-youtube'));
+			});
+		}
 		
-})
+		function showStats(vimeoID, youtubeID) {
+			$('#thumbs').hide();
+			
+
+/* 			alert(vimeoID, youtubeID); */
+		}
+
+		
+
+		// Call init function when the page loads
+		window.onload = init;
+		
+		
+		
+		var vimeoID = getUrlParameters("vimeoID", "", true);
+		
+		// Print video details on details page
+		/*
+function showStats() {
+			var data = document.getElementById('data');
+			data.innerHTML = '';
+			
+			function () {
+				var thumb = document.createElement('img');
+				thumb.setAttribute('src', videos[i].thumbnail_laarge);
+				thumb.setAttribute('alt', videos[i].title);
+				thumb.setAttribute('title', videos[i].title);
+				thumb.setAttribute('class', 'large-12 columns thumbnail');
+				
+				var p = document.createElement('p');
+				p.setAttribute('class', 'large-4 columns');
+				p.appendChild(thumb);
+				thumbs.appendChild(p);
+			}
+		}
 */
-
-
-
-
-
-
-
-
-
-/* Youtube API Key: AIzaSyBJHN8jCr4fenlfmNWnyFGbpOJ73l68Nqw */
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-function load() {
-	gapi.client.setApiKey('AIzaSyBJHN8jCr4fenlfmNWnyFGbpOJ73l68Nqw');
-  gapi.client.load('urlshortener', 'v1', makeRequest);	
-}
-
-function makeRequest() {
-  var request = gapi.client.urlshortener.url.get({
-    'shortUrl': 'http://goo.gl/fbsS'
-  });
-  request.execute(function(response) {
-    appendResults(response.longUrl);
-  });
-}
-
-function appendResults(text) {
-   var results = document.getElementById('results');
-   results.appendChild(document.createElement('P'));
-   results.appendChild(document.createTextNode(text));
-}
-
-
-
-(function($) {
-	//Assign YouTube API Key and Get YouTube Videos
-	var gapi.client.setApiKey('AIzaSyBJHN8jCr4fenlfmNWnyFGbpOJ73l68Nqw');
-	var gapi.client.load('youtube.videos.list', 'v1', function() { console.log('loaded.'); });
-	
-	
-	//Get Vimeo Username and Video
-	var vimeoUsername = 'japhethcrawford',
-		vimeoVideoId = '88327649',
-		vimeoVideos = 'http://vimeo.com/api/v2/' + vimeoUsername + '/videos.json',
-//		vimeoId = $.getParam('videoId'),
-		youtubeVideos = '';
-	
-	//Direct Vimeo what Functions to Call
-	//var title: videoTitle,
-	
-	// Get List of Videos
-	// Youtube & Vimeo
-	
-	var req = $.ajax({
-		url: vimeoVideos,
-		dataType: 'jsonp',
-		type: 'GET'
-	});
-	
-	req.done(function (data){
-		var videoReq = $.ajax({
-			url: 'http://vimeo.com/api/v2/video/' + data[0].id +'.json'
-		});
-		
-		videoReq.done(function (data){
-			console.log(data);
-		});
-	})
-
-		
-})(jQuery);

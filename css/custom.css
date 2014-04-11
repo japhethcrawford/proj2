@@ -1,5 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300);
 
+
+
 body {
 	font-family: 'Open Sans' sans-serif;
 	font-size: 100%;
@@ -29,9 +31,18 @@ h2 {
 	letter-spacing: .9px;
 }
 
-.videoTitle {
-	font-style: italic;
-	margin-top: 40px;
+.thumbnail {
+	margin-bottom: 10px;
+}
+a.videoLink {
+	color: #f2802c;
+	font-weight: 400;
+	font-size: 95%;
+	line-height: 150%;
+}
+
+a.videoLink:hover {
+	color: #b24008;
 }
 
 .viewsHeader {
