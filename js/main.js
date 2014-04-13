@@ -27,6 +27,7 @@
 				a.setAttribute('target', '_blank');
 				a.setAttribute('class', 'videoLink large-12 columns');
 				a.setAttribute('data-vimeo', videos[i].id);
+				a.setAttribute('title-vimeo', videos[i].title);
 				a.setAttribute('data-youtube', videos[i].id);
 				a.appendChild(document.createTextNode(videos[i].title));
 				
@@ -46,6 +47,8 @@
 				p.appendChild(document.createElement('br'));
 				p.appendChild(thumb);
 				thumbs.appendChild(p);
+				
+
 			}
 			
 			$('.videoLink').on('click', function(event) {
@@ -57,8 +60,17 @@
 		function showStats(vimeoID, youtubeID) {
 			$('#thumbs').hide();
 			
+/*
+				var div = document.createElement('div');
+				var h1 = document.createElement('h1');
+				div.setAttribute('class', 'large-6 columns stats');
+				h1.setAttribute(document.createTextNode(videoTitle));
+*/
 
-/* 			alert(vimeoID, youtubeID); */
+				
+		
+			
+			alert(vimeoID, youtubeID);
 		}
 
 		
@@ -68,7 +80,10 @@
 		
 		
 		
-		var vimeoID = getUrlParameters("vimeoID", "", true);
+/* 		var vimeoID = getUrlParameters("vimeoID", "", true); */
+		
+		console.log();
+
 		
 		// Print video details on details page
 		/*
