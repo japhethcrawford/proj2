@@ -1,28 +1,40 @@
 'use strict';
+//Global
+	var vimeoUserName = 'storyfarmvideo';
 
-		var vimeoUserName = 'storyfarmvideo';
+	// Tell Vimeo what function to call
+	var callback = 'showThumbs';
 
-		// Tell Vimeo what function to call
-		var callback = 'showThumbs';
+	// Set up URLs
+	var url = 'http://vimeo.com/api/v2/' + vimeoUserName + '/videos.json?callback=' + callback;
 
-		// Set up URLs
-		var url = 'http://vimeo.com/api/v2/' + vimeoUserName + '/videos.json?callback=' + callback;
+	// Print Client Name
+		
+		
+	function showUserName() {
+		document.getElementById("username");		
+		var h1 = document.createElement('h1');
+		h1.appendChild(document.createTextNode(vimeoUserName));
+		
+		return showUserName;
+		}				
 
-		// load vimeo data
-		function init() {
-			var js = document.createElement('script');
-			js.setAttribute('type', 'text/javascript');
-			js.setAttribute('src', url);
-			document.getElementsByTagName('head').item(0).appendChild(js);
-		}
 
-		// Print videos with thumbnails to page
-		function showThumbs(videos) {
-			var thumbs = document.getElementById('thumbs');
-			thumbs.innerHTML = '';
+	// load vimeo data
+	function init() {
+		var js = document.createElement('script');
+		js.setAttribute('type', 'text/javascript');
+		js.setAttribute('src', url);
+		document.getElementsByTagName('head').item(0).appendChild(js);
+	}
 
-			for (var i = 0; i < videos.length; i++) {
-				var a = document.createElement('a');
+	// Print videos with thumbnails to page
+	function showThumbs(videos) {
+		var thumbs = document.getElementById('thumbs');
+		thumbs.innerHTML = '';
+
+		for (var i = 0; i < videos.length; i++) {
+			var a = document.createElement('a');
 				a.setAttribute('href', 'details.html?vimeoID=' + videos[i].id);
 				a.setAttribute('target', '_blank');
 				a.setAttribute('class', 'videoLink large-12 columns');
@@ -31,58 +43,67 @@
 				a.setAttribute('data-youtube', videos[i].id);
 				a.appendChild(document.createTextNode(videos[i].title));
 				
-				var thumb = document.createElement('img');
+			var thumb = document.createElement('img');
 				thumb.setAttribute('src', videos[i].thumbnail_large);
 				thumb.setAttribute('alt', videos[i].title);
 				thumb.setAttribute('title', videos[i].title);
 				thumb.setAttribute('class', 'large-12 columns thumbnail');
-				
 
-				
-				var p = document.createElement('p');
+			var p = document.createElement('p');
 				p.setAttribute('class', 'large-4 columns');
 				p.appendChild(document.createElement('br'));
 				p.appendChild(a);
 				p.appendChild(document.createElement('br'));
 				p.appendChild(document.createElement('br'));
 				p.appendChild(thumb);
-				thumbs.appendChild(p);
-				
-
-			}
-			
-			$('.videoLink').on('click', function(event) {
-				event.preventDefault();
-				showStats($(this).attr('data-vimeo'), $(this).attr('data-youtube'));
-			});
+				thumbs.appendChild(p);		
 		}
-		
-		function showStats(vimeoID, youtubeID) {
-			$('#thumbs').hide();
 			
-/*
-				var div = document.createElement('div');
-				var h1 = document.createElement('h1');
-				div.setAttribute('class', 'large-6 columns stats');
-				h1.setAttribute(document.createTextNode(videoTitle));
-*/
-
-				
+		$('.videoLink').on('click', function(event) {
+			event.preventDefault();
+			showStats($(this).attr('data-vimeo'), $(this).attr('data-youtube'));
+		});
+	}
 		
+	function showStats(vimeoID, youtubeID) {
+		$('#thumbs').hide();
 			
 			alert(vimeoID, youtubeID);
 		}
-
-		
 
 		// Call init function when the page loads
 		window.onload = init;
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 /* 		var vimeoID = getUrlParameters("vimeoID", "", true); */
 		
-		console.log();
 
 		
 		// Print video details on details page
